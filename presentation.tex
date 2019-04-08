@@ -1,0 +1,42 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{underscore}
+\usepackage{epstopdf}
+\usepackage{hyperref}
+\usepackage{tikz}
+\defbeamertemplate{description item}{align left}{\insertdescriptionitem\hfill}
+\usetheme{metropolis}					 % Use metropolis theme
+\title{All Spreadsheets must Die}
+\date{\today}
+\author{Robert Schadek}
+\begin{document}
+	\maketitle
+
+	\section{Why}
+	\begin{frame}{Problems to Solve}
+		\begin{itemize}
+			\item Working together with multiple people
+			\item Creating a audit trail			
+			\item Remembering why you did something
+			\item See what has changed
+		\end{itemize}
+	\end{frame}
+
+	\section{Git}
+	\begin{frame}{Git}
+		\begin{itemize}
+			\item Distributed Version Control System
+			\item Works great with text files
+			\item Works bad with binary files
+		\end{itemize}
+		\vfill
+		\begin{itemize}
+			\item Line based changes are grouped into commits
+			\item Commits are ordered
+			\item Ordered commits are grouped into named branches
+		\end{itemize}	
+	\end{frame}
+
+\end{document}
