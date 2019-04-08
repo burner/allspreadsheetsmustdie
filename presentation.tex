@@ -1,4 +1,4 @@
-\documentclass[aspectratio=169]{beamer}
+\documentclass[aspectratio=169,notes]{beamer}
 \usepackage{lmodern}
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
@@ -6,37 +6,97 @@
 \usepackage{epstopdf}
 \usepackage{hyperref}
 \usepackage{tikz}
+\usepackage{xkeyval}
+\usepackage{todonotes}
+\presetkeys{todonotes}{inline}{}
 \defbeamertemplate{description item}{align left}{\insertdescriptionitem\hfill}
 \usetheme{metropolis}					 % Use metropolis theme
+\usepackage[
+    backend=biber,
+    url=true, 
+	style=numeric,
+    doi=true,
+    eprint=false
+]{biblatex}
+\addbibresource{biblatex-examples.bib}
+
 \title{All Spreadsheets must Die}
 \date{\today}
 \author{Robert Schadek}
 \begin{document}
 	\maketitle
 
-	\section{Why}
-	\begin{frame}{Problems to Solve}
+	\section{Getting started}
+	\begin{frame}{A random list of languages we love to hate}
 		\begin{itemize}
-			\item Working together with multiple people
-			\item Creating a audit trail			
-			\item Remembering why you did something
-			\item See what has changed
+			\item Rust
+			\item Go
+			\item C++
+			\item JavaScript
+			\item Typescript
 		\end{itemize}
+		\todo{replace itemize with logos}
 	\end{frame}
 
-	\section{Git}
-	\begin{frame}{Git}
-		\begin{itemize}
-			\item Distributed Version Control System
-			\item Works great with text files
-			\item Works bad with binary files
-		\end{itemize}
-		\vfill
-		\begin{itemize}
-			\item Line based changes are grouped into commits
-			\item Commits are ordered
-			\item Ordered commits are grouped into named branches
-		\end{itemize}	
+	\note[itemize]{
+		\item There are all these languages we like to hate.
+		\item Many of them are good, many are more popular.
+		\item Many might even be better.
+		\item But we are missing something
+	}
+
+	\begin{frame}{Hating by numbers}
+		\begin{description}
+			\item[C++] $4.4 Million$ (2015)
+			\item[C] $1.9 Million$ (2015)
+			\item[Java] $9 Million$ (2009)	
+			\item[JS] $10 Million$ (2018)
+		\end{description}
+	\end{frame}
+	
+	\begin{frame}
+		\begin{center}
+		\huge
+		These are all small fish\\[2cm]
+		\pause
+		\textbf{Excel} $750 Million$ (2016)
+		\end{center}
 	\end{frame}
 
+	\begin{frame}[fragile]
+		\begin{center}
+		\includegraphics[width=0.6\textwidth]{skepical.jpg}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}[fragile]{Oh, but it is \hfill{} \cite{GOTO201638:online}}
+		\begin{center}
+		\includegraphics[width=1.0\textwidth]{functionalexcel.jpg}
+		\end{center}
+	\end{frame}
+
+	\section{A little bit of Spreadsheet bashing}
+	\begin{frame}[fragile]{See the code is difficult}
+		\begin{center}
+		\includegraphics[width=1.0\textwidth]{excelseeingcode.jpg}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}[fragile]{Dynamic Types}
+		\begin{center}
+		\includegraphics[width=1.0\textwidth]{exceldynamic.jpg}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}[fragile]{Dynamic Types}
+		\begin{center}
+		\includegraphics[width=1.0\textwidth]{exceldynamic2.jpg}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}[fragile]{Dynamic Types}
+		\begin{center}
+		\includegraphics[width=1.0\textwidth]{exceldynamic3.jpg}
+		\end{center}
+	\end{frame}
 \end{document}
