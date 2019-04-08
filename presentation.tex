@@ -8,6 +8,7 @@
 \usepackage{xmpmulti}
 \usepackage{multimedia}
 \usepackage{epstopdf}
+\usepackage{bbding}
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{tikz}
@@ -117,6 +118,7 @@
 			\huge
 			git blame\\[2cm]
 			\pause
+			\large
 			lets not go there\footnote{we will just become sad}
 		\end{center}
 	\end{frame}
@@ -200,6 +202,56 @@
 			\pause
 			We are not!
 		\end{center}
+	\end{frame}
+
+	\begin{frame}{Lets take stock of what we have}
+		\begin{itemize}
+			\item Too many spreadsheets \pause \CheckmarkBold
+			\item Too many tasks \pause \CheckmarkBold
+			\item Too little man-power \pause \CheckmarkBold
+			\item Millions of lines of source in different languages \pause \CheckmarkBold
+			\item D's powerful Compile-Time (CT) features \pause \CheckmarkBold
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}{Possible Attack Vectors}
+		\begin{center}
+		\includegraphics[width=0.8\textwidth]{attackvectors.eps}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}{Leveraging existing libraries}
+		Writing data to spreadsheets
+		\begin{itemize}
+			\item Is is required, people will ask for that
+			\item Writing a somewhat feature complete xlsx writer is a huge task
+		\end{itemize}
+		\mbox{}\\[1cm]
+		\begin{itemize}
+			\item libxlsxwriter is a feature (complete) xlsx writer
+			\item Wrapping it by hand, no way (+78000 lines of structs, enums and functions)
+			\item dpp to the rescue
+			\item libxlsxwriter.d (+4000 lines)
+			\item But it is still a C api
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}[fragile]{Code example}
+		\begin{lstlisting}[language=c]
+void chart_axis_set_name(lxw_chart_axis*, const(char)*)
+void chart_axis_set_name_range(lxw_chart_axis*, const(char)*, lxw_row_t, lxw_col_t)
+void chart_axis_set_name_font(lxw_chart_axis*, lxw_chart_font*)
+void chart_axis_set_num_font(lxw_chart_axis*, lxw_chart_font*)
+void chart_axis_set_num_format(lxw_chart_axis*, const(char)*)
+void chart_axis_set_line(lxw_chart_axis*, lxw_chart_line*)
+void chart_axis_set_fill(lxw_chart_axis*, lxw_chart_fill*)
+void chart_axis_set_pattern(lxw_chart_axis*, lxw_chart_pattern*)
+void chart_axis_set_reverse(lxw_chart_axis*)
+void chart_axis_set_crossing(lxw_chart_axis*, double)
+void chart_axis_set_crossing_max(lxw_chart_axis*)
+void chart_axis_off(lxw_chart_axis*)
+		\end{lstlisting}
+		
 	\end{frame}
 
 \end{document}
