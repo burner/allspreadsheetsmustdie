@@ -11,6 +11,7 @@
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{tikz}
+\usetikzlibrary{shadows}
 \usepackage{xkeyval}
 \usepackage{todonotes}
 \presetkeys{todonotes}{inline}{}
@@ -147,6 +148,34 @@
 			\item Put web frontend on spreadsheet backend
 			\item Pivot company to become commerce company
 		\end{enumerate}	
+		\begin{tikzpicture}[remember picture,overlay]
+		    \node[drop shadow,xshift=75mm,yshift=-38mm,rotate=-15,anchor=north west] 
+				at (current page.north west){\includegraphics[width=50mm]{snafu.jpg}};
+			\pause
+		    \node[drop shadow,xshift=35mm,yshift=-38mm,rotate=15,anchor=north west] 
+				at (current page.north west){\includegraphics[width=50mm]{snafu2.jpg}};
+			\pause
+		    \node[drop shadow,xshift=75mm,yshift=-38mm,rotate=-35,anchor=north west] 
+				at (current page.north west){\includegraphics[width=50mm]{snafu3.jpg}};
+			\pause
+		    \node[drop shadow,xshift=75mm,yshift=-38mm,rotate=35,anchor=north west] 
+				at (current page.north west){\includegraphics[width=50mm]{snafu4.jpg}};
+			\pause
+		    \node[drop shadow,xshift=40mm,yshift=-33mm,rotate=15,anchor=north west] 
+				at (current page.north west){\includegraphics[width=50mm]{snafu5.jpg}};
+			\pause
+		    \node[drop shadow,xshift=55mm,yshift=-18mm,rotate=15,anchor=north west] 
+				at (current page.north west){\includegraphics[width=50mm]{snafu6.jpg}};
+			\pause
+		    \node[drop shadow,xshift=55mm,yshift=-28mm,rotate=5,anchor=north west] 
+				at (current page.north west){\includegraphics[width=50mm]{snafu7.jpg}};
+			\pause
+		    \node[drop shadow,xshift=35mm,yshift=-28mm,rotate=-17,anchor=north west] 
+				at (current page.north west){\includegraphics[width=50mm]{snafu8.jpg}};
+			\pause
+		    \node[drop shadow,xshift=35mm,yshift=-08mm,rotate=0,anchor=north west] 
+				at (current page.north west){\includegraphics[width=90mm]{snafu9.jpg}};
+		\end{tikzpicture}
 	\end{frame}
 	
 	\begin{frame}
@@ -159,6 +188,17 @@
 	\begin{frame}{How you should be feeling right now}
 		\begin{center}
     		\inlineMovie[loop&autostart&start=0&stop=12]{kermit.mpg}{kermit-0.png}{height=0.9\textheight}
+		\end{center}
+	\end{frame}
+
+	\section{Lets draw up a battle plan}
+
+	\begin{frame}{\mbox{}}
+		\begin{center}
+			\huge
+			How are we going to win this?\\[2cm]
+			\pause
+			We are not!
 		\end{center}
 	\end{frame}
 
