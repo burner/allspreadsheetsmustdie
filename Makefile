@@ -7,6 +7,6 @@ epss := $(patsubst %.plantuml,%.eps,$(wildcard *.plantuml))
 
 presentation.pdf: presentation.tex $(epss)
 	pdflatex presentation.tex
-	biber presentation
-	pdflatex presentation.tex
-	pdflatex presentation.tex
+	#biber presentation
+	#pdflatex presentation.tex
+	#pdflatex presentation.tex
