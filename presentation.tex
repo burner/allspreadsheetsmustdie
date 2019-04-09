@@ -363,10 +363,12 @@ __parameters
 		\end{center}
 	\end{frame}
 
+	\section{How to work with limited man-power}
+
 	\begin{frame}{Leveraging existing libraries}
 		Writing data to spreadsheets
 		\begin{itemize}
-			\item Is is required, people will ask for that
+			\item Is required, people will ask for that
 			\item Writing a somewhat feature complete xlsx writer is a huge task
 		\end{itemize}
 		\mbox{}\\[1cm]
@@ -379,7 +381,7 @@ __parameters
 		\end{itemize}
 	\end{frame}
 
-	\begin{frame}[fragile]{Code example}
+	\begin{frame}[fragile]{dpp output}
 		\begin{lstlisting}[language=D]
 void chart_axis_set_name(lxw_chart_axis*, const(char)*)
 void chart_axis_set_name_range(lxw_chart_axis*, const(char)*, lxw_row_t, lxw_col_t)
@@ -396,7 +398,7 @@ void chart_axis_off(lxw_chart_axis*)
 		\end{lstlisting}
 	\end{frame}
 
-	\begin{frame}[fragile]{Code example}
+	\begin{frame}[fragile]{semi-automatic refactoring}
 		\begin{lstlisting}[language=D]
 struct ChartAxis {
 	lxw_chart_axis* handle;
@@ -414,6 +416,22 @@ struct ChartAxis {
 	...
 }
 		\end{lstlisting}
+	\end{frame}
+
+	\begin{frame}[fragile]{Creating fake data}
+		Problem to solve: We needed fake data of people.
+		\begin{itemize}
+			\item Name
+			\item Address
+			\item i18n
+			\item ...
+		\end{itemize}	
+		\pause
+		\begin{tikzpicture}[remember picture,overlay]
+		    \node[xshift=10mm,yshift=-0mm,rotate=0,anchor=north west] 
+				at (current page.north west)
+				{\includegraphics[width=1.0\textwidth]{lovetrianglefaker.jpg}};
+		\end{tikzpicture}
 	\end{frame}
 
 \end{document}
