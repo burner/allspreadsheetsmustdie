@@ -1,0 +1,16 @@
+@startuml
+Frontend --> Backend: getAllEmployees()
+Frontend <-- Backend: Employee[] allEmps
+Frontend --> Backend: <font color=blue><b>foreach</b></font> getEmployeeInfo(emp.infoId);
+Frontend <-- Backend: EmployeeInfo info
+Frontend --> Backend: <font color=blue><b>foreach</b></font> getSalary(info.salaryId);
+Frontend <-- Backend: Salary sal
+Frontend --> Backend: <font color=blue><b>foreach</b></font> getCurrencyAmount(sal.amountId);
+Frontend <-- Backend: CurrencyAmount ca
+Frontend --> Backend: <font color=blue><b>foreach</b></font> getCurrency(ca.currencyId);
+Frontend <-- Backend: Currency c
+Frontend --> Backend: <font color=blue><b>foreach</b></font> getEmployee(sal.createdById);
+Frontend <-- Backend: Employee createdby
+Frontend --> Backend: <font color=blue><b>foreach</b></font> getEmployeeInfo(createdBy.infoId);
+Frontend <-- Backend: EmployeeInfo createdbyInfo
+@enduml

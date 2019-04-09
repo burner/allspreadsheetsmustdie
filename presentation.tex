@@ -136,7 +136,7 @@ __parameters
 \definecolor{eclipseBlue}{RGB}{42,0.0,255}
 \definecolor{eclipseGreen}{RGB}{63,127,95}
 \definecolor{eclipsePurple}{RGB}{127,0,85}
- 
+
 % Set Language
 \lstset{
   language={D},
@@ -153,6 +153,27 @@ __parameters
   commentstyle=\color{eclipseGreen}, % style of comments
   keywordstyle=\color{eclipsePurple}, % style of keywords
   stringstyle=\color{eclipseBlue}, % style of strings
+}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\lstdefinelanguage{TypeScript}{
+	keywords={break, case, catch, continue, debugger, default, delete, do, else,
+		false, finally, for, function, if, in, instanceof, new, null, return, switch,
+		this, throw, true, try, typeof, var, void, while, with, interface,
+		class, export, boolean, throw, implements, import, this, const, let,
+		of, =>},
+	morecomment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	morestring=[b]',
+	morestring=[b]",
+	ndkeywords={},
+	keywordstyle=\color{blue}\bfseries,
+	ndkeywordstyle=\color{darkgray}\bfseries,
+	identifierstyle=\color{black},
+	commentstyle=\color{purple}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	sensitive=true
 }
 \usepackage{tikz}
 \usetikzlibrary{shadows}
@@ -435,9 +456,273 @@ struct ChartAxis {
 	\end{frame}
 
 	\begin{frame}[fragile]{faker.js}
+		\includegraphics[width=0.2\textwidth]{fakerjs.png}
+		\begin{itemize}
+			\item $+160$ attributes
+			\item $39$ languages
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}[fragile]{faker.js}
+		\begin{lstlisting}[language=Java,caption={locales/de/name/name.js}]
+module["exports"] = [
+  "#{prefix} #{first_name} #{last_name}",
+  "#{first_name} #{nobility_title_prefix} #{last_name}",
+  "#{first_name} #{last_name}",
+  "#{first_name} #{last_name}",
+  "#{first_name} #{last_name}",
+  "#{first_name} #{last_name}"
+];\end{lstlisting}
+	\end{frame}
+
+	\begin{frame}[fragile]{FakeD}
+\begin{lstlisting}[language=D,basicstyle=\tiny\ttfamily]
+override string nameName() {
+	switch(uniform(0, 6, this.rnd)) {
+		case 0:
+			return format("%s %s %s", namePrefix(), nameFirstName(), nameLastName());
+		case 1:
+			return format("%s %s %s", nameFirstName(), nameNobilityTitlePrefix(), nameLastName());
+		case 2:
+			return format("%s %s", nameFirstName(), nameLastName());
+		case 3:
+			return format("%s %s", nameFirstName(), nameLastName());
+		case 4:
+			return format("%s %s", nameFirstName(), nameLastName());
+		case 5:
+			return format("%s %s", nameFirstName(), nameLastName());
+		default: assert(false);
+	}
+}
+\end{lstlisting}
+	\end{frame}
+
+	\begin{frame}[fragile]{FakeD}
+\begin{lstlisting}[language=D]
+import faked;
+
+auto f = new Faker(1337);
+writeln(f.nameName());
+
+// localized to german
+f = new Faker_de(1338);
+writeln(f.nameName());
+\end{lstlisting}
+	\end{frame}
+
+	\begin{frame}[fragile]{FakeD}
+		\begin{itemize}
+			\item Parser and Generator script $\approx 1500$ lines
+			\item A workday of manual labor
+			\item Output feature equivalent $\approx 70000$ lines faker.js clone
+			\item Most changes in faker.js just require a tool rerun to update
+		\end{itemize}
+		\pause
+		Bonus:
+		\begin{itemize}
+			\item Created to PRs to faker.js fixing wrong template expansion	
+		\end{itemize}
+	\end{frame}
+
+	\section{Taking a step back}
+	\begin{frame}[fragile]{The starting point}
+\begin{columns}
+\begin{column}{0.35\textwidth}
+\begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily]
+class Employee {
+	long id;
+	DateTime createdAd;
+
+	EmployeeInfo info;
+	long infoId;
+}	
+
+class EmployeeInfo {
+	long id;
+	string firstname;
+	string lastname;
+
+	Salary salary;
+	long salaryId;
+}	
+\end{lstlisting}
+\end{column}
+\begin{column}{0.35\textwidth}
+\begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily,firstnumber=17]
+class Salary {
+	long id;
+	Employee createdBy;
+	long createdById;
+
+	CurrencyAmount amount;
+	long amountId;
+}
+
+class CurrencyAmount {
+	long id;
+	double amount;
+
+	Currency currency;
+	long currencyId;
+}
+\end{lstlisting}
+\end{column}
+\begin{column}{0.25\textwidth}
+\begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily,firstnumber=32]
+class Currency {
+	long id;
+	string name;
+}
+\end{lstlisting}
+\end{column}
+\end{columns}
+	\end{frame}
+
+	\begin{frame}[fragile]{The vibe.d REST interface}
+\begin{lstlisting}[language=D]
+interface Backend {
+	Employee[] getAllEmployees();
+	Employee getEmployee(long empId);
+	EmployeeInfo getEmployeeInfo(long empInfoId);
+	Salary getSalary(long salaryId);
+	CurrencyAmount getCurrencyAmount(long currencyAmountId);
+	Currency getCurrency(long currencyId);
+}
+\end{lstlisting}
+	\end{frame}
+
+	\begin{frame}[fragile]{The Wanted Output: Salary Table}
 		\begin{center}
-			\includegraphics[0.9\textwidth]{fakerjs.png}
-		\end{center}	
+		\begin{tabular}{l | l | r | l | l}
+			Firstname & Lastname & Amount & Currency & CreatedBy \\ \hline
+			Hans & Meier & 73331 & USD & Ruth Ember \\
+			John & Doe & 83431 & GPB & Ruth Ember \\
+			Ruth & Ember & 103431 & EUR & Hans Meier \\
+		\end{tabular}	
+		\end{center}
+	\end{frame}
+
+	\begin{frame}[fragile]{The Frontend Code: Types}
+\begin{columns}
+\begin{column}{0.35\textwidth}
+\begin{lstlisting}[language=typescript,basicstyle=\scriptsize\ttfamily]
+interface Employee {
+	id: number;
+	createdAd: number;
+
+	info?: EmployeeInfo;
+	infoId: number;
+}	
+
+interface EmployeeInfo {
+	id: number;
+	firstname: string;
+	lastname: string;
+
+	salary?: Salary;
+	salaryId: number;
+}	
+\end{lstlisting}
+\end{column}
+\begin{column}{0.35\textwidth}
+\begin{lstlisting}[language=TypeScript,basicstyle=\scriptsize\ttfamily,firstnumber=17]
+interface Salary {
+	id: number;
+	createdBy?: Employee;
+	createdById: number;
+
+	amount?: CurrencyAmount;
+	amountId: number;
+}
+
+interface CurrencyAmount {
+	id: number;
+	amount: number;
+
+	currency?: Currency;
+	currencyId: number;
+}
+\end{lstlisting}
+\end{column}
+\begin{column}{0.25\textwidth}
+\begin{lstlisting}[language=TypeScript,basicstyle=\scriptsize\ttfamily,firstnumber=32]
+interface Currency {
+	id: number;
+	name: string;
+}
+\end{lstlisting}
+\end{column}
+\end{columns}
+	\end{frame}
+
+	\begin{frame}[fragile]{The Frontend Code: Backend Service}
+\begin{lstlisting}[language=TypeScript,basicstyle=\scriptsize\ttfamily,tabsize=4]
+import { 
+	Employee, EmployeeInfo, Salary, CurrencyAmount, Currency 
+} from "model";
+
+class Backend {
+	getAllEmployees() : Employee[] { ... }
+	getEmployee(empId: number): Employee { ... }
+	getEmployeeInfo(empInfoId: number): EmployeeInfo { ... }
+	getSalary(salaryId: number): Salary { ... }
+	getCurrencyAmount(currencyAmountId: number): CurrencyAmount { ... }
+	getCurrency(currencyId: number): Currency { ... }
+}
+\end{lstlisting}
+	\end{frame}
+
+	\begin{frame}[fragile]{The Frontend Code: Calling the Backend}
+\begin{lstlisting}[language=TypeScript,basicstyle=\scriptsize\ttfamily,tabsize=2]
+this.backend.getAllEmployees().pipe(
+	mergeMap((emps: Employee[]) => {
+		const obs = [];
+		for(const emp of emps) {
+			obs.push(this.backend.getEmployeeInfo(emp.infoId)
+				.pipe(map((empInfo: EmployeeInfo) => {
+						const ne: Employee = {...emp, info : empInfo};
+						return ne;
+					})
+				)
+			);
+		}
+		return forkJoin(obs);
+	}),
+	mergeMap((emps: Employee[]) => {
+		const obs = [];
+		for(const emp of emps) {
+			obs.push(this.backend.getSalary(emp.info.salaryId)
+				.pipe(map((sal: Salary) => {
+						const ne: Employee = {...emp};
+						ne.info.salary = sal;
+						return ne;
+					})
+				)
+			);
+		}
+		return forkJoin(obs);
+	}),
+\end{lstlisting}
+\end{frame}
+
+	\begin{frame}[fragile]{The Communication}
+		\begin{center}
+			\includegraphics[height=0.9\textheight]{restbackend.eps}
+		\end{center}
+	\end{frame}
+	
+	\begin{frame}[fragile]{The Conclusion}
+		\begin{itemize}
+			\item Clearly, this is unworkable
+			\item Not plastic at all
+			\item Just a lot of boring work
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}{The real Conclusion}
+		\begin{center}
+    		\inlineMovie[loop&autostart&start=0&stop=12]{keyboard.mpg}{keyboard-0.png}{height=0.9\textheight}
+		\end{center}
 	\end{frame}
 
 \end{document}
