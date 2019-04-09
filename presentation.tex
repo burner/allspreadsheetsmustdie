@@ -11,6 +11,149 @@
 \usepackage{bbding}
 \usepackage{hyperref}
 \usepackage{listings}
+\lstdefinelanguage{D}
+{
+  % list of keywords
+  morekeywords={
+abstract,
+alias,
+align,
+asm,
+assert,
+auto,
+body,
+bool,
+break,
+byte,
+case,
+cast,
+catch,
+cdouble,
+cent,
+cfloat,
+char,
+class,
+const,
+continue,
+creal,
+dchar,
+debug,
+default,
+delegate,
+delete (deprecated),
+deprecated,
+do,
+double,
+else,
+enum,
+export,
+extern,
+false,
+final,
+finally,
+float,
+for,
+foreach,
+foreach_reverse,
+function,
+goto,
+idouble,
+if,
+ifloat,
+immutable,
+import,
+in,
+inout,
+int,
+interface,
+invariant,
+ireal,
+is,
+lazy,
+long,
+mixin,
+module,
+new,
+nothrow,
+null,
+out,
+override,
+package,
+pragma,
+private,
+protected,
+public,
+pure,
+real,
+ref,
+return,
+scope,
+shared,
+short,
+static,
+string,
+struct,
+super,
+switch,
+synchronized,
+template,
+this,
+throw,
+true,
+try,
+typeid,
+typeof,
+ubyte,
+ucent,
+uint,
+ulong,
+union,
+unittest,
+ushort,
+version,
+void,
+wchar,
+while,
+with,
+__FILE__,
+__FILE_FULL_PATH__,
+__MODULE__,
+__LINE__,
+__FUNCTION__,
+__PRETTY_FUNCTION__,
+__gshared,
+__traits,
+__vector,
+__parameters
+  },
+  sensitive=false, % keywords are not case-sensitive
+  morecomment=[l]{//}, % l is for line comment
+  morecomment=[s]{/*}{*/}, % s is for start and end delimiter
+  morecomment=[s]{/+}{+/}, % s is for start and end delimiter
+  morestring=[b]" % defines that strings are enclosed in double quotes
+}
+\usepackage{color}
+\definecolor{eclipseBlue}{RGB}{42,0.0,255}
+\definecolor{eclipseGreen}{RGB}{63,127,95}
+\definecolor{eclipsePurple}{RGB}{127,0,85}
+ 
+% Set Language
+\lstset{
+  language={D},
+  basicstyle=\small\ttfamily, % Global Code Style
+  captionpos=b, % Position of the Caption (t for top, b for bottom)
+  extendedchars=true, % Allows 256 instead of 128 ASCII characters
+  tabsize=2, % number of spaces indented when discovering a tab 
+  columns=fixed, % make all characters equal width
+  keepspaces=true, % does not ignore spaces to fit width, convert tabs to spaces
+  showstringspaces=false, % lets spaces in strings appear as real spaces
+  breaklines=true, % wrap lines if they don't fit
+  numbers=left, % show line numbers at the left
+  numberstyle=\tiny\ttfamily, % style of the line numbers
+  commentstyle=\color{eclipseGreen}, % style of comments
+  keywordstyle=\color{eclipsePurple}, % style of keywords
+  stringstyle=\color{eclipseBlue}, % style of strings
+}
 \usepackage{tikz}
 \usetikzlibrary{shadows}
 \usepackage{xkeyval}
@@ -237,7 +380,7 @@
 	\end{frame}
 
 	\begin{frame}[fragile]{Code example}
-		\begin{lstlisting}[language=c]
+		\begin{lstlisting}[language=D]
 void chart_axis_set_name(lxw_chart_axis*, const(char)*)
 void chart_axis_set_name_range(lxw_chart_axis*, const(char)*, lxw_row_t, lxw_col_t)
 void chart_axis_set_name_font(lxw_chart_axis*, lxw_chart_font*)
@@ -251,7 +394,26 @@ void chart_axis_set_crossing(lxw_chart_axis*, double)
 void chart_axis_set_crossing_max(lxw_chart_axis*)
 void chart_axis_off(lxw_chart_axis*)
 		\end{lstlisting}
-		
+	\end{frame}
+
+	\begin{frame}[fragile]{Code example}
+		\begin{lstlisting}[language=D]
+struct ChartAxis {
+	lxw_chart_axis* handle;
+
+	void setName(string name) { 
+		chart_axis_set_name(this.handle, toStringz(name)); 
+	}
+
+	void setNameRange(string name, lxw_row_t row, 
+			lxw_col_t col) 
+	{
+		chart_axis_set_name(this.handle, toStringz(name), row, col
+			);
+	}
+	...
+}
+		\end{lstlisting}
 	\end{frame}
 
 \end{document}
