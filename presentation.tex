@@ -11,6 +11,8 @@
 \usepackage{epstopdf}
 \usepackage{bbding}
 \usepackage{hyperref}
+\usepackage{scalerel}
+\def\thumbup{\scalerel*{\includegraphics{thumbup.png}}{O}}
 \usepackage{listings}
 \lstdefinelanguage{D}
 {
@@ -938,4 +940,18 @@ void graphqlEndpoint(HTTPServerRequest req,
 \end{lstlisting}
 	\end{frame}
 
+	\begin{frame}[fragile]{Homework}
+		\begin{center}
+			Write a GraphQL backend that uses an excel spreadsheet as a database.
+		\end{center}
+	\end{frame}
+
+	\section{Conclusion}
+	\begin{frame}[fragile]{Conclusion}
+		\begin{itemize}
+			\item Spreadsheets must die.
+			\item We need to learn to use what is there.
+			\item GraphQL \thumbup{}
+		\end{itemize}
+	\end{frame}
 \end{document}
