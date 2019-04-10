@@ -1,16 +1,26 @@
 @startuml
 
 package "Compiler Process PID_1" #DDDDDD {
+	note "Compiler Process is a daemon" as N
 	class AST
 	class IR
 	class SymTable
+	class CodeCompletion
 	AST <|-- IR
 	SymTable <|-- IR
+	AST <|-- CodeCompletion
+	SymTable <|-- CodeCompletion
 }
 
 package "CLIDriver PID_2" {
+	note "The CLI interface\nused to give commands to\nthe Compiler Process" as C
 }
 
-"CLIDriver PID_2" --> "Compiler Process PID_1" : restarts compile process
+package "Editor PID_3" {
+	note "Your favorite editor or IDE here" as E
+}
+
+"CLIDriver PID_2" --> "Compiler Process PID_1" : initiate compile
+"Editor PID_3" --> "Compiler Process PID_1": get code completion info, etc.
 
 @enduml
