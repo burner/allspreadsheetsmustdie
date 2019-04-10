@@ -1005,7 +1005,7 @@ GQLDData GQLD(Args...)(Args args) {
 \end{lstlisting}
 	\end{frame}
 
-	\begin{frame}[fragile]{Static Foreach Switch}
+	\begin{frame}[fragile]{Static Foreach Switch Case}
 \begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily]
 Json ret = Json.emptyObject();
 string typename
@@ -1019,6 +1019,21 @@ l: switch(typename) {
 	default: break;
 }
 \end{lstlisting}
+	\end{frame}
+
+	\begin{frame}[fragile]{Compile-Time are long as}
+		\begin{itemize}
+			\item $\approx{} 7000$ lines
+			\item $\approx{} 8$ seconds build time
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}[fragile]{Overall Legacy Architecture}
+		\begin{itemize}
+			\item Traditional compiler pipeline is dated
+			\item Why does code-completion and the compiler different frontends
+			\item Recreating the AST, IR, and ASM on every compile is extremely wasteful
+		\end{itemize}
 	\end{frame}
 
 	\printbibliography
