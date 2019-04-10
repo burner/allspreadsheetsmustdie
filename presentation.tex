@@ -145,12 +145,10 @@
 \usetheme{metropolis}					 % Use metropolis theme
 \usepackage[
     backend=biber,
-    url=true, 
-	style=numeric,
-    doi=true,
-    eprint=false
+    url=true 
 ]{biblatex}
-\addbibresource{biblatex-examples.bib}
+\addbibresource{biblio.bib}
+\setbeamertemplate{bibliography item}{\insertbiblabel}
 
 \title{All Spreadsheets must Die}
 \date{\today}
@@ -184,6 +182,7 @@
 			\item[Java] $9 Million$ (2009)	
 			\item[JS] $10 Million$ (2018)
 		\end{description}
+		\footnote{\cite{cdevs,Develope3:online}}
 	\end{frame}
 	
 	\begin{frame}
@@ -192,6 +191,7 @@
 		These are all small fish\\[2cm]
 		\pause
 		\textbf{Excel} $750 Million$ (2016)
+		\footnote{\cite{Build20153:online,Sevenrea2:online}}
 		\end{center}
 	\end{frame}
 
@@ -949,9 +949,77 @@ void graphqlEndpoint(HTTPServerRequest req,
 	\section{Conclusion}
 	\begin{frame}[fragile]{Conclusion}
 		\begin{itemize}
-			\item Spreadsheets must die.
+			\item All Spreadsheets must die.
 			\item We need to learn to use what is there.
 			\item GraphQL \thumbup{}
 		\end{itemize}
 	\end{frame}
+
+	\section{The End}
+	\appendix
+
+	\section{Encore}
+	\begin{frame}[fragile]{Reappearing UDA Pattern}
+\begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily]
+struct Employee {
+    @GQLD(
+        Description("The social security number of an employee"),
+        Deprecated(IsDeprecated.yes, "To complex")
+    )
+    SocialSecurityNumber number;
+}
+\end{lstlisting}
+\pause
+\begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily,firstnumber=9]
+enum IsDeprecated {
+	undefined,
+	no,
+	yes
+}
+
+struct GQLDData {
+	Description desc;
+	Deprecated depre;
+}
+\end{lstlisting}
+	\end{frame}
+
+	\begin{frame}[fragile]{Reappearing UDA Pattern}
+\begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily]
+struct GQLDData {
+	Description desc;
+	Deprecated depre;
+}
+
+GQLDData GQLD(Args...)(Args args) {
+	GQLDData ret;
+	static foreach(mem; __traits(allMembers, GQLDData)) {
+		static foreach(arg; args) {
+			static if(is(typeof(__traits(getMember, ret, mem)) == typeof(arg))) {
+				__traits(getMember, ret, mem) = arg;
+			}
+		}
+	}
+	return ret;
+}
+\end{lstlisting}
+	\end{frame}
+
+	\begin{frame}[fragile]{Static Foreach Switch}
+\begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily]
+Json ret = Json.emptyObject();
+string typename
+l: switch(typename) {
+	static foreach(type; collectTypes!(T)) {{
+		case typeToTypeName!(type): {
+			ret["data"] = typeToJson!(type)();
+			break l;
+		}
+	}}
+	default: break;
+}
+\end{lstlisting}
+	\end{frame}
+
+	\printbibliography
 \end{document}
