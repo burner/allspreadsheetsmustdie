@@ -1,0 +1,16 @@
+@startuml
+
+package "Compiler Process PID_1" #DDDDDD {
+	class AST
+	class IR
+	class SymTable
+	AST <|-- IR
+	SymTable <|-- IR
+}
+
+package "CLIDriver PID_2" {
+}
+
+"CLIDriver PID_2" --> "Compiler Process PID_1" : restarts compile process
+
+@enduml
