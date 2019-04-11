@@ -1,7 +1,11 @@
 @startuml
 
+package "CLIDriver PID_2" {
+	note "The CLI interface is\nused to give commands to\nthe Compiler Process" as C
+}
+
 package "Compiler Process PID_1" #DDDDDD {
-	note "Compiler Process is a daemon" as N
+	note "Compiler Process is a daemon\nCaches result of lexing, parsing,\nvalidation, and stores dependencies\nof these results" as N
 	class AST
 	class IR
 	class SymTable
@@ -10,10 +14,6 @@ package "Compiler Process PID_1" #DDDDDD {
 	SymTable <|-- IR
 	AST <|-- CodeCompletion
 	SymTable <|-- CodeCompletion
-}
-
-package "CLIDriver PID_2" {
-	note "The CLI interface\nused to give commands to\nthe Compiler Process" as C
 }
 
 package "Editor PID_3" {

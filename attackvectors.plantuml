@@ -1,10 +1,10 @@
 @startuml
 start
 if(whoAmI() == "CTO") then (yes)
-	:Force everbody to use csv and D;
+	:Force everbody to use CSV and D;
 else (no)
 	:Request a "one table one worksheet policy";
-	:Dump spreadsheet into csv;
+	:Dump spreadsheets into CSV;
 	:Actually use D;
 endif
 :Profit;

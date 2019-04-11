@@ -10,6 +10,12 @@
 \usepackage{multimedia}
 \usepackage{epstopdf}
 \usepackage{bbding}
+
+% footnote without number
+\makeatletter
+\def\blfootnote{\xdef\@thefnmark{}\@footnotetext}
+\makeatother
+
 \usepackage{hyperref}
 \usepackage{scalerel}
 \def\thumbup{\scalerel*{\includegraphics{thumbup.png}}{O}}
@@ -182,7 +188,7 @@
 			\item[Java] $9 Million$ (2009)	
 			\item[JS] $10 Million$ (2018)
 		\end{description}
-		\footnote{\cite{cdevs,Develope3:online}}
+		\blfootnote{\cite{cdevs,Develope3:online}}
 	\end{frame}
 	
 	\begin{frame}
@@ -191,7 +197,7 @@
 		These are all small fish\\[2cm]
 		\pause
 		\textbf{Excel} $750 Million$ (2016)
-		\footnote{\cite{Build20153:online,Sevenrea2:online}}
+		\only<2->{\footnote{\cite{Build20153:online,Sevenrea2:online}}}
 		\end{center}
 	\end{frame}
 
@@ -208,7 +214,7 @@
 	\end{frame}
 
 	\section{A little bit of Spreadsheet bashing}
-	\begin{frame}[fragile]{See the code is difficult}
+	\begin{frame}[fragile]{Seeing the code is difficult}
 		\begin{center}
 		\includegraphics[width=1.0\textwidth]{excelseeingcode.jpg}
 		\end{center}
@@ -251,19 +257,19 @@
 	\begin{frame}[fragile]{Code refactoring}
 		\begin{itemize}
 			\item \lstinline@=SUM(1,2)@ \pause
-			\item equal, identifier, lparen, int(1), comma, int(2), comma, int(3), rparen
+			\item equal, identifier, lparen, int(1), comma, int(2), comma, int(3), rparen\\[5mm] \pause
 			\item set excel locale to de\_DE
 			\item \lstinline@=SUM(1,2)@ \pause
 			\item equal, identifier, lparen, float(1.2), rparen
 		\end{itemize}
 	\end{frame}
 
-	\begin{frame}[fragile]{Bits and pieces}
+	\begin{frame}[fragile]{Bits and Pieces}
 		\begin{itemize}
 			\item Knowledge silos
 			\item Slow	
 			\item No separation between data and code
-			\item Access management $\dots$ anybody
+			\item Access management $\dots$ \pause anybody?
 		\end{itemize}
 	\end{frame}
 
@@ -275,6 +281,7 @@
 			\item Put web frontend on spreadsheet backend
 			\item Pivot company to become commerce company
 		\end{enumerate}	
+		\pause
 		\begin{tikzpicture}[remember picture,overlay]
 		    \node[drop shadow,xshift=75mm,yshift=-38mm,rotate=-15,anchor=north west] 
 				at (current page.north west){\includegraphics[width=50mm]{snafu.jpg}};
@@ -300,7 +307,7 @@
 		    \node[drop shadow,xshift=35mm,yshift=-28mm,rotate=-17,anchor=north west] 
 				at (current page.north west){\includegraphics[width=50mm]{snafu8.jpg}};
 			\pause
-		    \node[drop shadow,xshift=35mm,yshift=-08mm,rotate=0,anchor=north west] 
+		    \node[drop shadow,xshift=35mm,yshift=-15mm,rotate=0,anchor=north west] 
 				at (current page.north west){\includegraphics[width=90mm]{snafu9.jpg}};
 		\end{tikzpicture}
 	\end{frame}
@@ -342,7 +349,7 @@
 			\item Too many tasks \pause \CheckmarkBold
 			\item Too little man-power \pause \CheckmarkBold
 			\item Millions of lines of source in different languages \pause \CheckmarkBold
-			\item D's powerful Compile-Time (CT) features \pause \CheckmarkBold
+			\item D's Compile-Time (CT) features \pause \CheckmarkBold
 		\end{itemize}
 	\end{frame}
 
@@ -362,8 +369,9 @@
 		\end{itemize}
 		\mbox{}\\[1cm]
 		\begin{itemize}
-			\item libxlsxwriter is a feature (complete) xlsx writer
+			\item libxlsxwriter is a feature rich xlsx writer
 			\item Wrapping it by hand, no way (+78000 lines of structs, enums and functions)
+			\pause
 			\item dpp to the rescue
 			\item libxlsxwriter.d (+4000 lines)
 			\item But it is still a C api
@@ -408,7 +416,7 @@ struct ChartAxis {
 	\end{frame}
 
 	\begin{frame}[fragile]{Creating fake data}
-		Problem to solve: We needed fake data of people.
+		Problem to solve: We needed fake data with a variety of attributes.
 		\begin{itemize}
 			\item Name
 			\item Address
@@ -481,9 +489,9 @@ writeln(f.nameName());
 	\begin{frame}[fragile]{FakeD}
 		\begin{itemize}
 			\item Parser and Generator script $\approx 1500$ lines
-			\item A workday of manual labor
+			\item A day of manual labor
 			\item Output feature equivalent $\approx 70000$ lines faker.js clone
-			\item Most changes in faker.js just require a tool rerun to update
+			\item Most changes in faker.js just require a rerun of the tool to update
 		\end{itemize}
 		\pause
 		Bonus:
@@ -679,7 +687,7 @@ this.backend.getAllEmployees().pipe(
 		\end{center}
 	\end{frame}
 	
-	\begin{frame}[fragile]{The Conclusion}
+	\begin{frame}[fragile]{The Takeaways}
 		\begin{itemize}
 			\item Clearly, this is unworkable
 			\item Not plastic at all
@@ -687,7 +695,7 @@ this.backend.getAllEmployees().pipe(
 		\end{itemize}
 	\end{frame}
 
-	\begin{frame}{The real Conclusion}
+	\begin{frame}{The real Takeway}
 		\begin{center}
     		\inlineMovie[loop&autostart&start=0&stop=10]{keyboard.mpg}{keyboard-0.png}{height=0.9\textheight}
 		\end{center}
@@ -781,6 +789,7 @@ type Employee {
 	createdAd: number!;
 
 	info: EmployeeInfo;
+	infoId: number!;
 }	
 \end{lstlisting}
 			\end{column}
@@ -790,12 +799,14 @@ type EmployeeInfo {
 	id: number!;
 	firstname: String!;
 	lastname: String!;
+	salaryId: number!;
 	salary: Salary;
 }	
 
 type Salary {
 	id: number!;
 	createdBy: Employee;
+	amountId: number!;
 	amount: CurrencyAmount;
 }
 \end{lstlisting}
@@ -806,6 +817,7 @@ type Salary {
 type CurrencyAmount {
 	id: number!;
 	amount: number!;
+	currencyId: number!;
 	currency: Currency;
 }
 type Currency {
@@ -904,6 +916,7 @@ class Schema {
 			\begin{column}{0.6\textwidth}
 \begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily]
 auto graphqld = new GraphQLD!(Schema)();
+
 graphqld.setResolver(
   "queryType", "getAllEmployees",
   delegate(string name, Json parent, 
@@ -918,6 +931,24 @@ graphqld.setResolver(
 \end{lstlisting}
 			\end{column}
 		\end{columns}
+	\end{frame}
+
+	\begin{frame}[fragile]{GraphQLD}
+\begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily]
+graphqld.setResolver("Employee", "info",
+  delegate(string name, Json parent, Json args,
+      ref Context context) @safe
+  {
+    immutable eid = "infoId";
+    enforce(eid in parent && parent[eid].type == Json.Type.int_,
+            "No int in by the name of 'infoId' in parent");
+    const long id = parent[eid].get!long();
+    Json ret = Json.emptyObject();
+    EmployeeInfo ei = getEmployeeInfo(id);
+    ret["data"] = toGraphqlJson(ei);
+    return ret;
+  });
+\end{lstlisting}
 	\end{frame}
 
 	\begin{frame}[fragile]{GraphQLD}
@@ -949,14 +980,18 @@ void graphqlEndpoint(HTTPServerRequest req,
 	\section{Conclusion}
 	\begin{frame}[fragile]{Conclusion}
 		\begin{itemize}
-			\item All Spreadsheets must die.
 			\item We need to learn to use what is there.
-			\item GraphQL \thumbup{}
+			\item Some small things matter.
+			\item Use D to work smart not hard.
+			\item GraphQL \thumbup{}\\[5mm]
+			\item All Spreadsheets must die.
 		\end{itemize}
 	\end{frame}
+	\appendix
 
 	\section{The End}
-	\appendix
+	\printbibliography
+
 
 	\section{Encore}
 	\begin{frame}[fragile]{Reappearing UDA Pattern}
@@ -1021,6 +1056,30 @@ l: switch(typename) {
 \end{lstlisting}
 	\end{frame}
 
+	\begin{frame}[fragile]{Collecting all Referenced Types}
+\begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily]
+alias allTypes = collectTypes!Schema;
+
+template collectTypesImpl(Type) {
+	import graphql.uda;
+	static if(is(Type : GQLDCustomLeaf!F, F)) {
+		alias collectTypes Impl= AliasSeq!(Type);
+	} else static if(is(Type == interface)) {
+		alias RetTypes = AliasSeq!(collectReturnType!(Type,
+				__traits(allMembers, Type)));
+		alias ArgTypes = AliasSeq!(collectParameterTypes!(Type,
+				__traits(allMembers, Type)));
+		alias collectTypesImpl = AliasSeq!(Type, RetTypes, 
+				ArgTypes, InterfacesTuple!Type);
+	....
+	} else static if(is(Type == union)) {
+		alias collectTypesImpl = AliasSeq!(Type, InheritedClasses!Type);
+	} else static if(is(Type : Nullable!F, F)) {
+		alias collectTypesImpl = .collectTypesImpl!(F);
+	...
+\end{lstlisting}
+	\end{frame}
+
 	\begin{frame}[fragile]{Compile-Time are long as}
 		\begin{itemize}
 			\item $\approx{} 7000$ lines
@@ -1042,6 +1101,4 @@ l: switch(typename) {
 		\end{center}
 	\end{frame}
 
-
-	\printbibliography
 \end{document}
