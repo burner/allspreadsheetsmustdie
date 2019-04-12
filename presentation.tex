@@ -98,7 +98,8 @@
     stepnumber=1,
     showstringspaces=false,
     breaklines=true,
-	keywords={type, schema, mutation, subscription, __type, __schema, kind},
+	keywords={type, schema, mutation, subscription, __type, __schema, kind,
+		on, fragment, query},
     literate=
      *{0}{{{\color{numb}0}}}{1}
       {1}{{{\color{numb}1}}}{1}
@@ -250,19 +251,25 @@
 			git blame\\[2cm]
 			\pause
 			\large
-			lets not go there\footnote{we will just become sad}
+			lets not go there
+			\only<2->{\blfootnote{we will just become sad}}
 		\end{center}
 	\end{frame}
 
 	\begin{frame}[fragile]{Code refactoring}
 		\begin{itemize}
 			\item \lstinline@=SUM(1,2)@ \pause
-			\item equal, identifier, lparen, int(1), comma, int(2), comma, int(3), rparen\\[5mm] \pause
+			\item equal, identifier, lparen, int(1), comma, int(2), rparen\\[5mm] \pause
 			\item set excel locale to de\_DE
 			\item \lstinline@=SUM(1,2)@ \pause
 			\item equal, identifier, lparen, float(1.2), rparen
 		\end{itemize}
 	\end{frame}
+
+	\note[itemize]{
+		\item Who cares about rvalues or named arguments.
+		\item I want this in D.
+	}
 
 	\begin{frame}[fragile]{Bits and Pieces}
 		\begin{itemize}
@@ -345,11 +352,11 @@
 
 	\begin{frame}{Lets take stock of what we have}
 		\begin{itemize}
-			\item Too many spreadsheets \pause \CheckmarkBold
-			\item Too many tasks \pause \CheckmarkBold
-			\item Too little man-power \pause \CheckmarkBold
-			\item Millions of lines of source in different languages \pause \CheckmarkBold
-			\item D's Compile-Time (CT) features \pause \CheckmarkBold
+			\item Too many spreadsheets \pause
+			\item Too many tasks \pause
+			\item Too little man-power \pause
+			\item Millions of lines of source in different languages \pause
+			\item D's Compile-Time (CT) features \pause
 		\end{itemize}
 	\end{frame}
 
@@ -395,7 +402,7 @@ void chart_axis_off(lxw_chart_axis*)
 		\end{lstlisting}
 	\end{frame}
 
-	\begin{frame}[fragile]{semi-automatic refactoring}
+	\begin{frame}[fragile]{Semi-automatic refactoring}
 		\begin{lstlisting}[language=D]
 struct ChartAxis {
 	lxw_chart_axis* handle;
@@ -702,10 +709,10 @@ this.backend.getAllEmployees().pipe(
 	\end{frame}
 
 	\begin{frame}{So, what do we want?}
-		\begin{itemize}
-			\item Declare how we want the data to look when we get it
-			\item Data should be Json
-		\end{itemize}
+		\begin{center}
+			\Large
+			Declare how we want the data to look when we get it
+		\end{center}
 	\end{frame}
 
 	\begin{frame}[fragile]{Why can't we write this?}
@@ -723,11 +730,11 @@ this.backend.getAllEmployees().pipe(
 				currency {
 					name
 				}
-			}
-			createdBy {
-				info {
-					firstname
-					lastname
+				createdBy {
+					info {
+						firstname
+						lastname
+					}
 				}
 			}
 		}
@@ -747,14 +754,14 @@ this.backend.getAllEmployees().pipe(
 					currency: {
 						name: "USD"
 					}
+					createdBy: {
+						info: {
+							firstname: "Ruth",
+							lastname: "Ember"
+						}
+					}
 				}
 			},
-			createdBy: {
-				info: {
-					firstname: "Ruth",
-					lastname: "Ember"
-				}
-			}
 		},
 		...
 	]
@@ -828,6 +835,51 @@ type Currency {
 			\end{column}
 		\end{columns}
 \end{frame}
+
+	\begin{frame}[fragile]{Less code is better}
+		\vspace{-7mm}	
+		\begin{columns}[t]
+			\begin{column}{0.5\textwidth}
+\begin{lstlisting}[language=GraphQL,basicstyle=\scriptsize\ttfamily]
+query one {
+	allEmployees {
+		...deep
+	}
+}
+
+fragment names on EmployeeInfo {
+	firstname
+	lastname
+}
+
+fragment empInfo on Employee {
+	info {
+		...names
+	}
+}
+\end{lstlisting}	
+			\end{column}
+			\begin{column}{0.5\textwidth}
+\begin{lstlisting}[language=GraphQL,basicstyle=\scriptsize\ttfamily]
+fragment deep on Employee {
+	info {
+		...names
+		salary {
+			amount
+			currency {
+				name
+			}
+			createdBy {
+				...empInfo
+			}
+		}	
+	}
+}
+\end{lstlisting}	
+			\end{column}
+			
+		\end{columns}
+	\end{frame}
 
 	\begin{frame}[fragile]{Introspecting Types}
 		\vspace{-7mm}	
@@ -990,18 +1042,19 @@ void graphqlEndpoint(HTTPServerRequest req,
 	\appendix
 
 	\section{The End}
-	\printbibliography
-
+	\begin{frame}[allowframebreaks]{}
+		\printbibliography[heading=none]
+	\end{frame}
 
 	\section{Encore}
 	\begin{frame}[fragile]{Reappearing UDA Pattern}
 \begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily]
 struct Employee {
-    @GQLD(
-        Description("The social security number of an employee"),
-        Deprecated(IsDeprecated.yes, "To complex")
-    )
-    SocialSecurityNumber number;
+	@GQLD(
+		Description("The social security number of an employee"),
+		Deprecated(IsDeprecated.yes, "To complex")
+	)
+	SocialSecurityNumber number;
 }
 \end{lstlisting}
 \pause
