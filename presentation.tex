@@ -25,7 +25,7 @@
   % list of keywords
   morekeywords={ abstract, alias, align, asm, assert, auto, body, bool, break,
 	byte, case, cast, catch, cdouble, cent, cfloat, char, class, const,
-	continue, double, else, enum, export, extern, false, final, finally,
+	continue, default, double, else, enum, export, extern, false, final, finally,
 	float, for, foreach, foreach_reverse, function, goto, idouble, if, ifloat,
 	immutable, import, in, inout, int, interface, invariant, ireal, is, lazy,
 	long, mixin, module, new, nothrow, null, out, override, package, pragma,
@@ -70,7 +70,7 @@
 \definecolor{purple}{rgb}{0.65, 0.12, 0.82}
 \lstdefinelanguage{TypeScript}{
 	keywords={break, case, catch, continue, debugger, default, delete, do, else,
-		false, finally, for, function, if, in, instanceof, new, null, return, switch,
+		false, from, finally, for, function, if, in, instanceof, new, null, return, switch,
 		this, throw, true, try, typeof, var, void, while, with, interface,
 		class, export, boolean, throw, implements, import, this, const, let,
 		of, =>},
@@ -144,7 +144,7 @@
       {]}{{{\color{delim}{]}}}}{1},
 }
 \usepackage{tikz}
-\usetikzlibrary{shadows}
+\usetikzlibrary{shadows,calc}
 \usepackage{xkeyval}
 \usepackage{todonotes}
 \presetkeys{todonotes}{inline}{}
@@ -164,15 +164,46 @@
 	\maketitle
 
 	\section{Getting started}
-	\begin{frame}{A random list of languages we love to hate}
-		\begin{itemize}
-			\item Rust
-			\item Go
-			\item C++
-			\item JavaScript
-			\item Typescript
-		\end{itemize}
-		\todo{replace itemize with logos}
+	\begin{frame}[fragile]{A random list of languages we love to hate}
+		\begin{tikzpicture}[remember picture,overlay]
+  			\node[anchor=south west,inner sep=0pt, rotate=15] at ($(current page.south west)+(2cm,3cm)$) {
+				\includegraphics[width=30mm]{cpplogo.eps}
+			};
+  			\node[anchor=south west,inner sep=0pt, rotate=-15] at ($(current page.south west)+(5cm,4cm)$) {
+				\includegraphics[width=30mm]{rustlogo.eps}
+			};
+  			\node[anchor=south west,inner sep=0pt, rotate=2] at ($(current page.south west)+(8cm,0.5cm)$) {
+				\includegraphics[width=30mm]{golang.png}
+			};
+  			\node[anchor=south west,inner sep=0pt, rotate=10] at ($(current page.south west)+(9cm,4cm)$) {
+				\includegraphics[width=30mm]{tslogo.png}
+			};
+  			\node[anchor=south west,inner sep=0pt, rotate=-10] at ($(current page.south west)+(5cm,0.5cm)$) {
+				\includegraphics[width=30mm]{clogo.png}
+			};
+  			\node[anchor=south west,inner sep=0pt, rotate=-20] at ($(current page.south west)+(10cm,0.5cm)$) {
+				\includegraphics[width=30mm]{jslogo.png}
+			};
+  			\node[anchor=south west,inner sep=0pt, rotate=-20] at ($(current page.south west)+(11.5cm,4.0cm)$) {
+				\includegraphics[width=30mm]{javalogo.png}
+			};
+  			\node[anchor=south west,inner sep=0pt, rotate=0] at ($(current page.south west)+(13.0cm,1.0cm)$) {
+				\includegraphics[width=30mm]{csharp.png}
+			};
+  			\node[anchor=south west,inner sep=0pt, rotate=20] at ($(current page.south west)+(1cm,0cm)$) {
+				\includegraphics[width=30mm]{dlogo.png}
+			};
+  			\node[anchor=south west,inner sep=0pt, rotate=20] at ($(current page.south west)+(4cm,1.5cm)$) {
+				\includegraphics[width=30mm]{pythonlogo.png}
+			};
+
+		    %\node[xshift=75mm,yshift=-38mm,rotate=-15,anchor=north west] 
+			%	at (current page.north west){};
+		    %\node[xshift=15mm,yshift=-28mm,rotate=15,anchor=north west] 
+			%	at (current page.north west){\includegraphics[width=30mm]{rustlogo.png}};
+		    %\node[xshift=15mm,yshift=-48mm,rotate=15,anchor=north west] 
+			%	at (current page.north west){\includegraphics[width=30mm]{golang.png}};
+		\end{tikzpicture}
 	\end{frame}
 
 	\note[itemize]{
@@ -204,7 +235,13 @@
 
 	\begin{frame}[fragile]
 		\begin{center}
-		\includegraphics[width=0.6\textwidth]{skepical.jpg}
+		\includegraphics[width=0.6\textwidth]{skeptical1.png}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\begin{center}
+		\includegraphics[width=0.6\textwidth]{skeptical2.png}
 		\end{center}
 	\end{frame}
 
@@ -241,22 +278,23 @@
 
 	\begin{frame}[fragile]
 		\begin{center}
-		\includegraphics[width=0.6\textwidth]{boyholdingfart.jpg}
+		\includegraphics[width=0.8\textwidth]{picard.png}
 		\end{center}
 	\end{frame}
 
 	\begin{frame}[fragile]{git blame}
 		\begin{center}
-			\huge
+			\Large
 			git blame\\[2cm]
 			\pause
-			\large
+			\Huge
 			lets not go there
 			\only<2->{\blfootnote{we will just become sad}}
 		\end{center}
 	\end{frame}
 
 	\begin{frame}[fragile]{Code refactoring}
+		\Large
 		\begin{itemize}
 			\item \lstinline@=SUM(1,2)@ \pause
 			\item equal, identifier, lparen, int(1), comma, int(2), rparen\\[5mm] \pause
@@ -272,6 +310,7 @@
 	}
 
 	\begin{frame}[fragile]{Bits and Pieces}
+		\Large
 		\begin{itemize}
 			\item Knowledge silos
 			\item Slow	
@@ -281,6 +320,7 @@
 	\end{frame}
 
 	\begin{frame}[fragile]{(Typical) Spreadsheet Lifecycle}
+		\Large
 		\begin{enumerate}
 			\item Create private shopping spreadsheet
 			\item Show spreadsheet to college 
@@ -333,9 +373,10 @@
 	\end{frame}
 
 	\begin{frame}{Two assumptions going forward}
+		\huge
 		\begin{itemize}
 			\item You believe that spreadsheets rule the world.
-			\item You actually want D to rule the world.
+			\item You want D to rule the world instead.
 		\end{itemize}
 	\end{frame}
 
@@ -351,12 +392,13 @@
 	\section{Lets draw up a battle plan}
 
 	\begin{frame}{Lets take stock of what we have}
+		\large
 		\begin{itemize}
-			\item Too many spreadsheets \pause
-			\item Too many tasks \pause
-			\item Too little man-power \pause
-			\item Millions of lines of source in different languages \pause
-			\item D's Compile-Time (CT) features \pause
+			\item Too many spreadsheets
+			\item Too many tasks
+			\item Too little man-power\\[1cm] \pause
+			\item Millions of lines of source in different languages
+			\item D's Compile-Time (CT) features
 		\end{itemize}
 	\end{frame}
 
@@ -369,15 +411,16 @@
 	\section{How to work with limited man-power}
 
 	\begin{frame}{Leveraging existing libraries}
+		\pause
+		\large
 		Writing data to spreadsheets
 		\begin{itemize}
 			\item Is required, people will ask for that
-			\item Writing a somewhat feature complete xlsx writer is a huge task
+			\item Writing a somewhat feature complete xlsx writer is a huge task\\[1cm]
 		\end{itemize}
-		\mbox{}\\[1cm]
 		\begin{itemize}
 			\item libxlsxwriter is a feature rich xlsx writer
-			\item Wrapping it by hand, no way (+78000 lines of structs, enums and functions)
+			\item Wrapping it by hand, \pause no way (+78000 lines of structs, enums and functions)\\[1cm]
 			\pause
 			\item dpp to the rescue
 			\item libxlsxwriter.d (+4000 lines)
@@ -386,7 +429,7 @@
 	\end{frame}
 
 	\begin{frame}[fragile]{dpp output}
-		\begin{lstlisting}[language=D]
+		\begin{lstlisting}[language=D,basicstyle=\small\ttfamily]
 void chart_axis_set_name(lxw_chart_axis*, const(char)*)
 void chart_axis_set_name_range(lxw_chart_axis*, const(char)*, lxw_row_t, lxw_col_t)
 void chart_axis_set_name_font(lxw_chart_axis*, lxw_chart_font*)
@@ -395,11 +438,7 @@ void chart_axis_set_num_format(lxw_chart_axis*, const(char)*)
 void chart_axis_set_line(lxw_chart_axis*, lxw_chart_line*)
 void chart_axis_set_fill(lxw_chart_axis*, lxw_chart_fill*)
 void chart_axis_set_pattern(lxw_chart_axis*, lxw_chart_pattern*)
-void chart_axis_set_reverse(lxw_chart_axis*)
-void chart_axis_set_crossing(lxw_chart_axis*, double)
-void chart_axis_set_crossing_max(lxw_chart_axis*)
-void chart_axis_off(lxw_chart_axis*)
-		\end{lstlisting}
+\end{lstlisting}
 	\end{frame}
 
 	\begin{frame}[fragile]{Semi-automatic refactoring}
@@ -419,10 +458,11 @@ struct ChartAxis {
 	}
 	...
 }
-		\end{lstlisting}
+\end{lstlisting}
 	\end{frame}
 
 	\begin{frame}[fragile]{Creating fake data}
+		\large
 		Problem to solve: We needed fake data with a variety of attributes.
 		\begin{itemize}
 			\item Name
@@ -432,14 +472,19 @@ struct ChartAxis {
 		\end{itemize}	
 		\pause
 		\begin{tikzpicture}[remember picture,overlay]
-		    \node[xshift=10mm,yshift=-0mm,rotate=0,anchor=north west] 
-				at (current page.north west)
-				{\includegraphics[width=1.0\textwidth]{lovetrianglefaker.jpg}};
+  			\node[anchor=south west,inner sep=0pt, rotate=0] at ($(current page.south west)+(1cm,0cm)$) {
+				\includegraphics[width=1.0\textwidth]{lovetrianglefaker.jpg}
+			};
+		%\begin{tikzpicture}[remember picture,overlay]
+		%    \node[xshift=10mm,yshift=-0mm,rotate=0,anchor=north west] 
+		%		at (current page.north west)
+		%		{\includegraphics[width=1.0\textwidth]{lovetrianglefaker.jpg}};
 		\end{tikzpicture}
 	\end{frame}
 
 	\begin{frame}[fragile]{faker.js}
 		\includegraphics[width=0.2\textwidth]{fakerjs.png}
+		\large
 		\begin{itemize}
 			\item $+160$ attributes
 			\item $39$ languages
@@ -459,21 +504,23 @@ module["exports"] = [
 	\end{frame}
 
 	\begin{frame}[fragile]{FakeD}
-\begin{lstlisting}[language=D,basicstyle=\tiny\ttfamily]
+\begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily]
 override string nameName() {
 	switch(uniform(0, 6, this.rnd)) {
 		case 0:
-			return format("%s %s %s", namePrefix(), nameFirstName(), nameLastName());
+			return format!"%s %s %s"(namePrefix(), nameFirstName(), 
+					nameLastName());
 		case 1:
-			return format("%s %s %s", nameFirstName(), nameNobilityTitlePrefix(), nameLastName());
+			return format!"%s %s %s"(nameFirstName(), nameNobilityTitlePrefix(), 
+					nameLastName());
 		case 2:
-			return format("%s %s", nameFirstName(), nameLastName());
+			return format!"%s %s"(nameFirstName(), nameLastName());
 		case 3:
-			return format("%s %s", nameFirstName(), nameLastName());
+			return format!"%s %s"(nameFirstName(), nameLastName());
 		case 4:
-			return format("%s %s", nameFirstName(), nameLastName());
+			return format!"%s %s"(nameFirstName(), nameLastName());
 		case 5:
-			return format("%s %s", nameFirstName(), nameLastName());
+			return format!"%s %s"(nameFirstName(), nameLastName());
 		default: assert(false);
 	}
 }
@@ -494,8 +541,9 @@ writeln(f.nameName());
 	\end{frame}
 
 	\begin{frame}[fragile]{FakeD}
+		\Large
 		\begin{itemize}
-			\item Parser and Generator script $\approx 1500$ lines
+			\item Parser and Generator $\approx 1500$ lines of D
 			\item A day of manual labor
 			\item Output feature equivalent $\approx 70000$ lines faker.js clone
 			\item Most changes in faker.js just require a rerun of the tool to update
@@ -514,7 +562,7 @@ writeln(f.nameName());
 \begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily]
 class Employee {
 	long id;
-	DateTime createdAd;
+	DateTime createdAt;
 
 	EmployeeInfo info;
 	long infoId;
@@ -562,19 +610,20 @@ class Currency {
 	\end{frame}
 
 	\begin{frame}[fragile]{The vibe.d REST interface}
-\begin{lstlisting}[language=D]
+\begin{lstlisting}[language=D,basicstyle=\normalsize\ttfamily]
 interface Backend {
 	Employee[] getAllEmployees();
 	Employee getEmployee(long empId);
 	EmployeeInfo getEmployeeInfo(long empInfoId);
 	Salary getSalary(long salaryId);
-	CurrencyAmount getCurrencyAmount(long currencyAmountId);
+	CurrencyAmount getCurrencyAmount(long amountId);
 	Currency getCurrency(long currencyId);
 }
 \end{lstlisting}
 	\end{frame}
 
 	\begin{frame}[fragile]{The Wanted Output: Salary Table}
+		\Large
 		\begin{center}
 		\begin{tabular}{l | l | r | l | l}
 			Firstname & Lastname & Amount & Currency & CreatedBy \\ \hline
@@ -587,11 +636,11 @@ interface Backend {
 
 	\begin{frame}[fragile]{The Frontend Code: Types}
 \begin{columns}
-\begin{column}{0.35\textwidth}
-\begin{lstlisting}[language=typescript,basicstyle=\scriptsize\ttfamily]
+\begin{column}{0.5\textwidth}
+\begin{lstlisting}[language=typescript,basicstyle=\small\ttfamily]
 interface Employee {
 	id: number;
-	createdAd: number;
+	createdAt: number;
 
 	info?: EmployeeInfo;
 	infoId: number;
@@ -607,8 +656,8 @@ interface EmployeeInfo {
 }	
 \end{lstlisting}
 \end{column}
-\begin{column}{0.35\textwidth}
-\begin{lstlisting}[language=TypeScript,basicstyle=\scriptsize\ttfamily,firstnumber=17]
+\begin{column}{0.5\textwidth}
+\begin{lstlisting}[language=TypeScript,basicstyle=\small\ttfamily,firstnumber=17]
 interface Salary {
 	id: number;
 	createdBy?: Employee;
@@ -627,19 +676,11 @@ interface CurrencyAmount {
 }
 \end{lstlisting}
 \end{column}
-\begin{column}{0.25\textwidth}
-\begin{lstlisting}[language=TypeScript,basicstyle=\scriptsize\ttfamily,firstnumber=32]
-interface Currency {
-	id: number;
-	name: string;
-}
-\end{lstlisting}
-\end{column}
 \end{columns}
 	\end{frame}
 
 	\begin{frame}[fragile]{The Frontend Code: Backend Service}
-\begin{lstlisting}[language=TypeScript,basicstyle=\scriptsize\ttfamily,tabsize=4]
+\begin{lstlisting}[language=TypeScript,basicstyle=\small\ttfamily,tabsize=4]
 import { 
 	Employee, EmployeeInfo, Salary, CurrencyAmount, Currency 
 } from "model";
@@ -649,14 +690,14 @@ class Backend {
 	getEmployee(empId: number): Employee { ... }
 	getEmployeeInfo(empInfoId: number): EmployeeInfo { ... }
 	getSalary(salaryId: number): Salary { ... }
-	getCurrencyAmount(currencyAmountId: number): CurrencyAmount { ... }
+	getCurrencyAmount(amountId: number): CurrencyAmount { ... }
 	getCurrency(currencyId: number): Currency { ... }
 }
 \end{lstlisting}
 	\end{frame}
 
 	\begin{frame}[fragile]{The Frontend Code: Calling the Backend}
-\begin{lstlisting}[language=TypeScript,basicstyle=\scriptsize\ttfamily,tabsize=2]
+\begin{lstlisting}[language=TypeScript,basicstyle=\footnotesize\ttfamily,tabsize=2]
 this.backend.getAllEmployees().pipe(
 	mergeMap((emps: Employee[]) => {
 		const obs = [];
@@ -695,6 +736,7 @@ this.backend.getAllEmployees().pipe(
 	\end{frame}
 	
 	\begin{frame}[fragile]{The Takeaways}
+		\Large
 		\begin{itemize}
 			\item Clearly, this is unworkable
 			\item Not plastic at all
@@ -711,7 +753,7 @@ this.backend.getAllEmployees().pipe(
 	\begin{frame}{So, what do we want?}
 		\begin{center}
 			\Large
-			Declare how we want the data to look when we get it
+			Declare how we want the data to look when we ask for it
 		\end{center}
 	\end{frame}
 
@@ -741,7 +783,7 @@ this.backend.getAllEmployees().pipe(
 	}
 }
 \end{lstlisting}	
-			\end{column}
+			\end{column}\pause
 			\begin{column}{0.5\textwidth}
 				\begin{lstlisting}[language=json,basicstyle=\scriptsize\ttfamily]
 {
@@ -793,7 +835,7 @@ type Backend {
 
 type Employee {
 	id: number!;
-	createdAd: number!;
+	createdAt: number!;
 
 	info: EmployeeInfo;
 	infoId: number!;
@@ -974,7 +1016,6 @@ graphqld.setResolver(
   delegate(string name, Json parent, 
       Json args, ref Context context) @safe
   {
-    enforce(context.auth.isLoggedIn());
     Employee[] employees = getAllEmployees();
     Json ret = Json.emptyObject();
     ret["data"] = toGraphqlJson(employees);
@@ -986,14 +1027,12 @@ graphqld.setResolver(
 	\end{frame}
 
 	\begin{frame}[fragile]{GraphQLD}
-\begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily]
+\begin{lstlisting}[language=D,basicstyle=\small\ttfamily]
 graphqld.setResolver("Employee", "info",
   delegate(string name, Json parent, Json args,
       ref Context context) @safe
   {
     immutable eid = "infoId";
-    enforce(eid in parent && parent[eid].type == Json.Type.int_,
-            "No int in by the name of 'infoId' in parent");
     const long id = parent[eid].get!long();
     Json ret = Json.emptyObject();
     EmployeeInfo ei = getEmployeeInfo(id);
@@ -1009,21 +1048,35 @@ void graphqlEndpoint(HTTPServerRequest req,
 		HTTPServerResponse res) 
 {
 	string toParse = extractQuery(req);
-	Json vars = extractVariables(req);
 	auto p = Parser(Lexer(toParse));
 
 	Document d = p.parseDocument();
-	StaticValidator fv = new StaticValidator(d);
+	auto fv = new QueryValidator(d);
+	auto sv = new SchemaValidator!Schema(d, graphqld.schema);
 	fv.accept(d);
+	sv.accept(d);
 
-	Context context = buildContext(req);
-	Json ret = graphqld.execute(d, vars, context);
+	Context con = buildContext(req);
+	Json ret = graphqld.execute(d, extractVariables(req), con);
 	res.writeJsonBody(ret);
 }
 \end{lstlisting}
 	\end{frame}
 
+	\begin{frame}{GraphQLD}
+		\Large
+		\begin{itemize}
+			\item Mostly feature complete
+			\item Some validations are missing
+			\item $\approx 17000$ lines
+			\item $\approx 9000$ are generated by darser
+			\item ready for use
+		\end{itemize}	
+	\end{frame}
+
+	\section{Homework}
 	\begin{frame}[fragile]{Homework}
+		\huge
 		\begin{center}
 			Write a GraphQL backend that uses an excel spreadsheet as a database.
 		\end{center}
@@ -1031,12 +1084,14 @@ void graphqlEndpoint(HTTPServerRequest req,
 
 	\section{Conclusion}
 	\begin{frame}[fragile]{Conclusion}
+		\Large
 		\begin{itemize}
+			\item Spreadsheets are a terrible programming language. \pause
+			\item C++ and Rust are not our main competition.\\[1cm] \pause
 			\item We need to learn to use what is there.
-			\item Some small things matter.
 			\item Use D to work smart not hard.
+			\item Do not write the code, write the code that writes the code.
 			\item GraphQL \thumbup{}\\[5mm]
-			\item All Spreadsheets must die.
 		\end{itemize}
 	\end{frame}
 	\appendix
@@ -1073,7 +1128,7 @@ struct GQLDData {
 	\end{frame}
 
 	\begin{frame}[fragile]{Reappearing UDA Pattern}
-\begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily]
+\begin{lstlisting}[language=D,basicstyle=\footnotesize\ttfamily]
 struct GQLDData {
 	Description desc;
 	Deprecated depre;
@@ -1083,7 +1138,9 @@ GQLDData GQLD(Args...)(Args args) {
 	GQLDData ret;
 	static foreach(mem; __traits(allMembers, GQLDData)) {
 		static foreach(arg; args) {
-			static if(is(typeof(__traits(getMember, ret, mem)) == typeof(arg))) {
+			static if(is(typeof(__traits(getMember, ret, mem)) == 
+					typeof(arg))) 
+			{
 				__traits(getMember, ret, mem) = arg;
 			}
 		}
@@ -1094,9 +1151,9 @@ GQLDData GQLD(Args...)(Args args) {
 	\end{frame}
 
 	\begin{frame}[fragile]{Static Foreach Switch Case}
-\begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily]
+\begin{lstlisting}[language=D,basicstyle=\footnotesize\ttfamily]
 Json ret = Json.emptyObject();
-string typename
+string typename = ...;
 l: switch(typename) {
 	static foreach(type; collectTypes!(T)) {{
 		case typeToTypeName!(type): {
@@ -1106,6 +1163,7 @@ l: switch(typename) {
 	}}
 	default: break;
 }
+return ret;
 \end{lstlisting}
 	\end{frame}
 
@@ -1134,6 +1192,7 @@ template collectTypesImpl(Type) {
 	\end{frame}
 
 	\begin{frame}[fragile]{Compile-Time are long as}
+		\Large
 		\begin{itemize}
 			\item $\approx{} 7000$ lines
 			\item $\approx{} 8$ seconds build time
@@ -1141,14 +1200,17 @@ template collectTypesImpl(Type) {
 	\end{frame}
 
 	\begin{frame}[fragile]{Overall Legacy Architecture}
+		\Large
 		\begin{itemize}
-			\item Traditional compiler pipeline is dated
-			\item Why does code-completion and the compiler different frontends
+			\item Traditional compiler pipeline design is dated
+				\pause
+			\item We have practically unlimited memory
 			\item Recreating the AST, IR, and ASM on every compile is extremely wasteful
+			\item Why does code-completion and the compiler different frontends
 		\end{itemize}
 	\end{frame}
 
-	\begin{frame}{Possible Compiler Rearch}
+	\begin{frame}{Possible Compiler Re-arch}
 		\begin{center}
 		\includegraphics[height=0.9\textheight]{rearch.eps}
 		\end{center}
