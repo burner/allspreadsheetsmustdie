@@ -11,6 +11,9 @@
 \usepackage{epstopdf}
 \usepackage{bbding}
 
+\definecolor{Title}{rgb}{0.94,0.52,0.08}
+\setbeamercolor{frametitle}{bg=Title,fg=black}
+
 % footnote without number
 \makeatletter
 \def\blfootnote{\xdef\@thefnmark{}\@footnotetext}
@@ -152,6 +155,7 @@
 \usetheme{metropolis}					 % Use metropolis theme
 \usepackage[
     backend=biber,
+	sorting=none,
     url=true 
 ]{biblatex}
 \addbibresource{biblio.bib}
@@ -491,7 +495,7 @@ struct ChartAxis {
 		\item It hurts me to say, but just look at the packages on npmjs.
 	}
 
-	\begin{frame}[fragile]{faker.js}
+	\begin{frame}[fragile]{faker.js \hfill\cite{fakerjs}}
 		\includegraphics[width=0.2\textwidth]{fakerjs.png}
 		\large
 		\begin{itemize}
@@ -512,7 +516,7 @@ module["exports"] = [
 ];\end{lstlisting}
 	\end{frame}
 
-	\begin{frame}[fragile]{FakeD}
+	\begin{frame}[fragile]{FakeD \hfill\cite{faked}}
 \begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily]
 override string nameName() {
 	switch(uniform(0, 6, this.rnd)) {
@@ -590,7 +594,7 @@ writeln(f.nameName());
 
 	\begin{frame}[fragile]{The starting point}
 \begin{columns}
-\begin{column}{0.35\textwidth}
+\begin{column}[t]{0.35\textwidth}
 \begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily]
 class Employee {
 	long id;
@@ -610,7 +614,7 @@ class EmployeeInfo {
 }	
 \end{lstlisting}
 \end{column}
-\begin{column}{0.35\textwidth}
+\begin{column}[t]{0.35\textwidth}
 \begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily,firstnumber=17]
 class Salary {
 	long id;
@@ -630,7 +634,7 @@ class CurrencyAmount {
 }
 \end{lstlisting}
 \end{column}
-\begin{column}{0.25\textwidth}
+\begin{column}[t]{0.25\textwidth}
 \begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily,firstnumber=32]
 class Currency {
 	long id;
@@ -841,14 +845,13 @@ this.backend.getAllEmployees().pipe(
 		\end{columns}
 	\end{frame}
 
-	\begin{frame}{GraphQL}
+	\begin{frame}{GraphQL \hfill\cite{graphql}}
 		\begin{center}
 			\includegraphics[height=0.9\textheight]{graphql.eps}	
 		\end{center}
 	\end{frame}
 
 	\begin{frame}[fragile]{GraphQL}
-		\hspace{2mm}%
 		\begin{columns}[t]
 			\begin{column}{0.38\textwidth}
 		\begin{lstlisting}[language=GraphQL,basicstyle=\scriptsize\ttfamily]
@@ -1018,7 +1021,7 @@ fragment deep on Employee {
 		\end{center}
 	\end{frame}
 
-	\begin{frame}[fragile]{GraphQLD}
+	\begin{frame}[fragile]{GraphQLD \hfill\cite{graphqld}}
 		\begin{columns}[t]
 			\begin{column}{0.4\textwidth}
 \begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily]
@@ -1243,4 +1246,17 @@ template collectTypesImpl(Type) {
 		\end{center}
 	\end{frame}
 
+	\begin{frame}{Darser \hfill\cite{darser}}
+		\begin{itemize}
+			\item Darser is a recursive descent parser generator for LL(1) grammars
+			\item It also generates the AST and a default Visitor
+			\item Not at CT, but as a pre-build step\\[1cm]\pause
+			\item It generates ``good'' error messages
+			\item Not just a generic Node types, but names that reflect the grammar
+			\item Inheriting from the default Visitor is trivial and powerful
+			\item Used right now by GraphQLD
+		\end{itemize}
+	\end{frame}
+
+	\section{I'm out of Slides}
 \end{document}
