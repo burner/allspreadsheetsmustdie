@@ -196,20 +196,13 @@
   			\node[anchor=south west,inner sep=0pt, rotate=20] at ($(current page.south west)+(4cm,1.5cm)$) {
 				\includegraphics[width=30mm]{pythonlogo.png}
 			};
-
-		    %\node[xshift=75mm,yshift=-38mm,rotate=-15,anchor=north west] 
-			%	at (current page.north west){};
-		    %\node[xshift=15mm,yshift=-28mm,rotate=15,anchor=north west] 
-			%	at (current page.north west){\includegraphics[width=30mm]{rustlogo.png}};
-		    %\node[xshift=15mm,yshift=-48mm,rotate=15,anchor=north west] 
-			%	at (current page.north west){\includegraphics[width=30mm]{golang.png}};
 		\end{tikzpicture}
 	\end{frame}
 
 	\note[itemize]{
 		\item There are all these languages we like to hate.
 		\item Many of them are good, many are more popular.
-		\item Many might even be better.
+		\item Many might even be better than D in some regards.
 		\item But we are missing something
 	}
 
@@ -222,27 +215,38 @@
 		\end{description}
 		\blfootnote{\cite{cdevs,Develope3:online}}
 	\end{frame}
+
+	\note[itemize]{
+		\item Many of the languages are used by more people than D is.
+		\item Programms written in C run the world (linux).
+		\item JS is eating everything.
+	}
 	
-	\begin{frame}
+	\begin{frame}{\mbox{}}
 		\begin{center}
 		\huge
-		These are all small fish\\[2cm]
+		These are all small fish\\[15mm]
 		\pause
-		\textbf{Excel} $750 Million$ (2016)
+		\textbf{\Huge{Excel}}\\[15mm]
+		$\approx{} 750$ Million (2016)
 		\only<2->{\footnote{\cite{Build20153:online,Sevenrea2:online}}}
 		\end{center}
 	\end{frame}
 
-	\begin{frame}[fragile]
-		\begin{center}
-		\includegraphics[width=0.6\textwidth]{skeptical1.png}
-		\end{center}
+	\begin{frame}[fragile]{\mbox{}}
+		\begin{tikzpicture}[remember picture,overlay]
+  			\node[anchor=south west,inner sep=0pt, rotate=0] at ($(current page.south west)+(4cm,0cm)$) {
+				\includegraphics[width=0.6\textwidth]{skeptical1.png}
+			};
+		\end{tikzpicture}
 	\end{frame}
 
-	\begin{frame}[fragile]
-		\begin{center}
-		\includegraphics[width=0.6\textwidth]{skeptical2.png}
-		\end{center}
+	\begin{frame}[fragile]{\mbox{}}
+		\begin{tikzpicture}[remember picture,overlay]
+  			\node[anchor=south west,inner sep=0pt, rotate=0] at ($(current page.south west)+(4cm,0cm)$) {
+				\includegraphics[width=0.6\textwidth]{skeptical2.png}
+			};
+		\end{tikzpicture}
 	\end{frame}
 
 	\begin{frame}[fragile]{Oh, but it is \hfill{} \cite{GOTO201638:online}}
@@ -354,8 +358,11 @@
 		    \node[drop shadow,xshift=35mm,yshift=-28mm,rotate=-17,anchor=north west] 
 				at (current page.north west){\includegraphics[width=50mm]{snafu8.jpg}};
 			\pause
+		    \node[drop shadow,xshift=35mm,yshift=-28mm,rotate=17,anchor=north west] 
+				at (current page.north west){\includegraphics[width=50mm]{snafu10.jpg}};
+			\pause
 		    \node[drop shadow,xshift=35mm,yshift=-15mm,rotate=0,anchor=north west] 
-				at (current page.north west){\includegraphics[width=90mm]{snafu9.jpg}};
+				at (current page.north west){\includegraphics[width=70mm]{snafu9.jpg}};
 		\end{tikzpicture}
 	\end{frame}
 	
@@ -374,10 +381,10 @@
 
 	\begin{frame}{Two assumptions going forward}
 		\huge
-		\begin{itemize}
+		\begin{enumerate}
 			\item You believe that spreadsheets rule the world.
 			\item You want D to rule the world instead.
-		\end{itemize}
+		\end{enumerate}
 	\end{frame}
 
 	\begin{frame}{\mbox{}}
@@ -398,7 +405,7 @@
 			\item Too many tasks
 			\item Too little man-power\\[1cm] \pause
 			\item Millions of lines of source in different languages
-			\item D's Compile-Time (CT) features
+			\item D
 		\end{itemize}
 	\end{frame}
 
@@ -411,9 +418,9 @@
 	\section{How to work with limited man-power}
 
 	\begin{frame}{Leveraging existing libraries}
-		\pause
 		\large
 		Writing data to spreadsheets
+		\pause
 		\begin{itemize}
 			\item Is required, people will ask for that
 			\item Writing a somewhat feature complete xlsx writer is a huge task\\[1cm]
@@ -453,7 +460,8 @@ struct ChartAxis {
 	void setNameRange(string name, lxw_row_t row, 
 			lxw_col_t col) 
 	{
-		chart_axis_set_name(this.handle, toStringz(name), row, col
+		chart_axis_set_name(this.handle, toStringz(name), row, 
+				col
 			);
 	}
 	...
@@ -462,6 +470,7 @@ struct ChartAxis {
 	\end{frame}
 
 	\begin{frame}[fragile]{Creating fake data}
+		\pause
 		\large
 		Problem to solve: We needed fake data with a variety of attributes.
 		\begin{itemize}
@@ -475,12 +484,12 @@ struct ChartAxis {
   			\node[anchor=south west,inner sep=0pt, rotate=0] at ($(current page.south west)+(1cm,0cm)$) {
 				\includegraphics[width=1.0\textwidth]{lovetrianglefaker.jpg}
 			};
-		%\begin{tikzpicture}[remember picture,overlay]
-		%    \node[xshift=10mm,yshift=-0mm,rotate=0,anchor=north west] 
-		%		at (current page.north west)
-		%		{\includegraphics[width=1.0\textwidth]{lovetrianglefaker.jpg}};
 		\end{tikzpicture}
 	\end{frame}
+
+	\note[itemize]{
+		\item It hurts me to say, but just look at the packages on npmjs.
+	}
 
 	\begin{frame}[fragile]{faker.js}
 		\includegraphics[width=0.2\textwidth]{fakerjs.png}
@@ -543,19 +552,42 @@ writeln(f.nameName());
 	\begin{frame}[fragile]{FakeD}
 		\Large
 		\begin{itemize}
-			\item Parser and Generator $\approx 1500$ lines of D
-			\item A day of manual labor
-			\item Output feature equivalent $\approx 70000$ lines faker.js clone
-			\item Most changes in faker.js just require a rerun of the tool to update
-		\end{itemize}
+			\item Input:
+			\begin{itemize}
+				\large
+				\item Parser and Generator $\approx 1500$ lines of D
+				\item A day of labor
+			\end{itemize}
 		\pause
-		Bonus:
-		\begin{itemize}
-			\item Created to PRs to faker.js fixing wrong template expansion	
+			\item Output:
+			\begin{itemize}
+				\large
+				\item Output feature equivalent $\approx 70000$ lines faker.js clone
+				\item Most changes in faker.js just require a rerun of the tool to update
+			\end{itemize}
+		\pause
+			\item Bonus:
+			\begin{itemize}
+				\large
+				\item Created two PRs to faker.js fixing wrong template expansion	
+			\end{itemize}
 		\end{itemize}
 	\end{frame}
 
 	\section{Taking a step back}
+
+	\begin{frame}[fragile]{The Wanted Output: Salary Table}
+		\Large
+		\begin{center}
+		\begin{tabular}{l | l | r | l | l}
+			Firstname & Lastname & Amount & Currency & CreatedBy \\ \hline
+			Hans & Meier & 73331 & USD & Ruth Ember \\
+			John & Doe & 83431 & GPB & Ruth Ember \\
+			Ruth & Ember & 103431 & EUR & Hans Meier \\
+		\end{tabular}	
+		\end{center}
+	\end{frame}
+
 	\begin{frame}[fragile]{The starting point}
 \begin{columns}
 \begin{column}{0.35\textwidth}
@@ -620,18 +652,6 @@ interface Backend {
 	Currency getCurrency(long currencyId);
 }
 \end{lstlisting}
-	\end{frame}
-
-	\begin{frame}[fragile]{The Wanted Output: Salary Table}
-		\Large
-		\begin{center}
-		\begin{tabular}{l | l | r | l | l}
-			Firstname & Lastname & Amount & Currency & CreatedBy \\ \hline
-			Hans & Meier & 73331 & USD & Ruth Ember \\
-			John & Doe & 83431 & GPB & Ruth Ember \\
-			Ruth & Ember & 103431 & EUR & Hans Meier \\
-		\end{tabular}	
-		\end{center}
 	\end{frame}
 
 	\begin{frame}[fragile]{The Frontend Code: Types}
@@ -750,12 +770,19 @@ this.backend.getAllEmployees().pipe(
 		\end{center}
 	\end{frame}
 
-	\begin{frame}{So, what do we want?}
+	\begin{frame}{So, what do we/I want?}
 		\begin{center}
 			\Large
-			Declare how we want the data to look when we ask for it
+			Declare how we want data to get, when we're asking for it.
 		\end{center}
 	\end{frame}
+	\note[itemize]{
+		\item We don't want the backend to dictate what data we can ask for.
+		\item Going to the backend, more than once is not acceptable, bad
+			networks and such.
+		\item We want no Under-fetching.
+		\item We want no Over-fetching.
+	}
 
 	\begin{frame}[fragile]{Why can't we write this?}
 		\vspace{-7mm}	
@@ -882,7 +909,7 @@ type Currency {
 		\vspace{-7mm}	
 		\begin{columns}[t]
 			\begin{column}{0.5\textwidth}
-\begin{lstlisting}[language=GraphQL,basicstyle=\scriptsize\ttfamily]
+\begin{lstlisting}[language=GraphQL,basicstyle=\footnotesize\ttfamily]
 query one {
 	allEmployees {
 		...deep
@@ -902,7 +929,7 @@ fragment empInfo on Employee {
 \end{lstlisting}	
 			\end{column}
 			\begin{column}{0.5\textwidth}
-\begin{lstlisting}[language=GraphQL,basicstyle=\scriptsize\ttfamily]
+\begin{lstlisting}[language=GraphQL,basicstyle=\footnotesize\ttfamily]
 fragment deep on Employee {
 	info {
 		...names
@@ -1028,22 +1055,6 @@ graphqld.setResolver(
 
 	\begin{frame}[fragile]{GraphQLD}
 \begin{lstlisting}[language=D,basicstyle=\small\ttfamily]
-graphqld.setResolver("Employee", "info",
-  delegate(string name, Json parent, Json args,
-      ref Context context) @safe
-  {
-    immutable eid = "infoId";
-    const long id = parent[eid].get!long();
-    Json ret = Json.emptyObject();
-    EmployeeInfo ei = getEmployeeInfo(id);
-    ret["data"] = toGraphqlJson(ei);
-    return ret;
-  });
-\end{lstlisting}
-	\end{frame}
-
-	\begin{frame}[fragile]{GraphQLD}
-\begin{lstlisting}[language=D,basicstyle=\small\ttfamily]
 void graphqlEndpoint(HTTPServerRequest req, 
 		HTTPServerResponse res) 
 {
@@ -1063,14 +1074,29 @@ void graphqlEndpoint(HTTPServerRequest req,
 \end{lstlisting}
 	\end{frame}
 
+	\begin{frame}[fragile]{GraphQLD}
+\begin{lstlisting}[language=D,basicstyle=\small\ttfamily]
+graphqld.setResolver("Employee", "info",
+  delegate(string name, Json parent, Json args,
+      ref Context context)
+  {
+    const id = parent["infoId"].get!long();
+    EmployeeInfo ei = getEmployeeInfo(id);
+    Json ret = Json.emptyObject();
+    ret["data"] = toGraphqlJson(ei);
+    return ret;
+  });
+\end{lstlisting}
+	\end{frame}
+
 	\begin{frame}{GraphQLD}
 		\Large
 		\begin{itemize}
 			\item Mostly feature complete
 			\item Some validations are missing
 			\item $\approx 17000$ lines
-			\item $\approx 9000$ are generated by darser
-			\item ready for use
+			\item $\approx 9000$ lines are generated by darser
+			\item ready for use now
 		\end{itemize}	
 	\end{frame}
 
@@ -1091,6 +1117,7 @@ void graphqlEndpoint(HTTPServerRequest req,
 			\item We need to learn to use what is there.
 			\item Use D to work smart not hard.
 			\item Do not write the code, write the code that writes the code.
+			\item Look at JS for inspiration.
 			\item GraphQL \thumbup{}\\[5mm]
 		\end{itemize}
 	\end{frame}
