@@ -282,9 +282,9 @@
 		\end{center}
 	\end{frame}
 
-	\begin{frame}[fragile]
+	\begin{frame}[fragile]{\mbox{}}
 		\begin{center}
-		\includegraphics[width=0.8\textwidth]{picard.png}
+		\vspace{-10mm}\includegraphics[width=0.9\textwidth]{picard.png}
 		\end{center}
 	\end{frame}
 
@@ -459,12 +459,10 @@ struct ChartAxis {
 		chart_axis_set_name(this.handle, toStringz(name)); 
 	}
 
-	void setNameRange(string name, lxw_row_t row, 
+	void setNameRange(string n, lxw_row_t row, 
 			lxw_col_t col) 
 	{
-		chart_axis_set_name(this.handle, toStringz(name), row, 
-				col
-			);
+		chart_axis_set_name(this.handle, toStringz(n), row, col);
 	}
 	...
 }
@@ -472,9 +470,9 @@ struct ChartAxis {
 	\end{frame}
 
 	\begin{frame}[fragile]{Creating fake data}
-		\pause
 		\large
 		Problem to solve: We needed fake data with a variety of attributes.
+		\pause
 		\begin{itemize}
 			\item Name
 			\item Address
@@ -1114,7 +1112,8 @@ graphqld.setResolver("Employee", "info",
 		\Large
 		\begin{itemize}
 			\item Spreadsheets are a terrible programming language. \pause
-			\item C++ and Rust are not our main competition.\\[1cm] \pause
+			\item C++ and Rust are not our main competition on our path to
+				world domination.\\[1cm] \pause
 			\item We need to learn to use what is there.
 			\item Use D to work smart not hard.
 			\item Do not write the code, write the code that writes the code.
@@ -1217,7 +1216,30 @@ template collectTypesImpl(Type) {
 		alias collectTypesImpl = .collectTypesImpl!(F);
 	...
 \end{lstlisting}
-	\end{frame}
+\end{frame}
+
+\begin{frame}[fragile]{Type trinary expression}
+\begin{lstlisting}[language=D,basicstyle=\scriptsize\ttfamily]
+template InheritedClass(T) {
+	import std.meta : staticMap, AliasSeq, NoDuplicates;
+	import std.traits : Select;
+
+	alias getInheritedFields() = staticMap!(.InheritedClass, FieldTypeTuple!T);
+	alias ftt = Select!(is(T == union), getInheritedFields, AliasSeq);
+
+	alias getBaseTuple() = staticMap!(.InheritedClass, BaseClassesTuple!T);
+	alias clss = Select!(is(T == class), getBaseTuple, AliasSeq);
+
+	alias getInter() = staticMap!(.InheritedClass, InterfacesTuple!T);
+	alias inter = Select!(is(T == class) || is(T == interface),
+			getInter, 
+			AliasSeq
+		);
+
+	alias InheritedClass = NoDuplicates!(AliasSeq!(ftt!(), clss!(), inter!()));
+}
+\end{lstlisting}
+\end{frame}
 
 	\begin{frame}[fragile]{Compile-Time are long as}
 		\Large
@@ -1234,11 +1256,11 @@ template collectTypesImpl(Type) {
 				\pause
 			\item We have practically unlimited memory
 			\item Recreating the AST, IR, and ASM on every compile is extremely wasteful
-			\item Why does code-completion and the compiler different frontends
+			\item Why does code-completion and the compiler use different frontends
 		\end{itemize}
 	\end{frame}
 
-	\begin{frame}{Possible Compiler Re-arch}
+	\begin{frame}{Compiler Re-arch idea}
 		\begin{center}
 		\includegraphics[height=0.9\textheight]{rearch.eps}
 		\end{center}
@@ -1256,5 +1278,5 @@ template collectTypesImpl(Type) {
 		\end{itemize}
 	\end{frame}
 
-	\section{I'm out of Slides}
+	\section{I am out of Slides}
 \end{document}
